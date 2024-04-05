@@ -1,0 +1,26 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elastic
+  namespace: octopos-prime-es
+spec:
+  version: 8.13.1
+  nodeSets:
+  - name: master
+    count: 3
+    config:
+      node.roles: ["master", "data", "ingest"]
+      node.store.allow_mmap: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elastic-lb
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 9200
+      targetPort: 9200
+  selector:
+    common.k8s.elastic.co/type: elasticsearch
+    elasticsearch.k8s.elastic.co/cluster-name: elastic
