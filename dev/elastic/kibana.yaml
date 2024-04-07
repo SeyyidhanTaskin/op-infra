@@ -1,0 +1,31 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+spec:
+  version: 8.13.1
+  count: 1
+  elasticsearchRef:
+    name: elastic
+    namespace: default
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: elastic-es-elastic-user
+type: Opaque
+stringData:
+  username: "elastic"
+  password: "password"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana-lb
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 5601
+      targetPort: 5601
+  selector:
+    kibana.k8s.elastic.co/name: kibana
