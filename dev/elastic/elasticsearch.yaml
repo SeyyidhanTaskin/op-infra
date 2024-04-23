@@ -3,13 +3,25 @@ kind: Elasticsearch
 metadata:
   name: elastic
 spec:
-  version: 8.13.1
+  version: 8.13.2
   nodeSets:
   - name: master
     count: 3
     config:
       node.roles: ["master", "data", "ingest"]
       node.store.allow_mmap: false
+    podTemplate:
+      spec:
+        containers:
+        - name: elasticsearch
+          env:
+          - name: ES_JAVA_OPTS
+            value: "-Xms3g -Xmx3g"
+          resources:
+            requests:
+              memory: 6Gi
+            limits:
+              memory: 6Gi
 ---
 apiVersion: v1
 kind: Service
