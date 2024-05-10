@@ -22,13 +22,13 @@ else
     git pull origin "$branch"
 fi
 
-# Submodule'ları güncelle
+# Submodule'ları update 
 git submodule update --init --recursive
 
-# Değişiklikleri göster
+# Show changes
 echo "Changes in repository:"
 git log --oneline --decorate --graph -n 5
 
-# Script tamamlandı mesajı
+# Script completed message
 echo "Repository is up to date in $clone_dir."
 
