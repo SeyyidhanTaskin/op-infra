@@ -9,7 +9,7 @@ branch="phase1"
 # Directory to clone the repository into
 clone_dir="$HOME/k8s/project/op-infra"
 
-# Repository klonlama veya güncelleme işlemi
+# Repository cloning or updating process
 if [ ! -d "$clone_dir" ]; then
     echo "Repository not found locally. Cloning into $clone_dir..."
     git clone --branch "$branch" "$repo_url" "$clone_dir" --recursive
@@ -22,7 +22,7 @@ else
     git pull origin "$branch"
 fi
 
-# Submodule'ları update 
+# Submodules update 
 git submodule update --init --recursive
 
 # Show changes
