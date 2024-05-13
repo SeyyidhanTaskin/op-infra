@@ -3,7 +3,7 @@
 # GitHub repository URL
 repo_url="https://github.com/octoposprime/op-infra.git"
 
-# Branch name
+# Branch name that currently using
 branch="phase1"
 
 # Directory to clone the repository into
